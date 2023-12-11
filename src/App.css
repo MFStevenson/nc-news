@@ -1,7 +1,49 @@
 #root {
-  max-width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
   text-align: left;
-  font-family: "Lato", sans-serif;
-  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.loading-spinner {
+  margin: auto;
+  border: 20px solid rgb(239, 250, 250);
+  border-radius: 50%;
+  border-top: 20px solid rgb(67, 125, 125);
+  width: 130px;
+  height: 130px;
+  animation: spinner 2s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+}
+
+nav > ul li {
+  display: inline;
+  padding: 0.2rem;
+  padding-bottom: 10px;
+}
+
+ul li {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#article-card {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 2px solid black;
+  border-radius: 15px;
 }
