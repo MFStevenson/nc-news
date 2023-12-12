@@ -1,25 +1,16 @@
-import { useState, useEffect } from "react";
-import { getArticles } from "../utils/api";
-import Articles from "../components/Articles";
-import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 
-const HomePage = ({ articles, setArticles }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    getArticles().then((res) => {
-      const { articles } = res.data;
-      setArticles(articles);
-      setIsLoading(false);
-    });
-  }, []);
-
-  if (isLoading) return <Loading />;
-
+const HomePage = () => {
   return (
-    <>
-      <Articles articles={articles} />
-    </>
+    <section id="home-page">
+      <h2>Choose which page you'd like to visit</h2>
+      <Link to="/articles">
+        <button>View All Articles</button>
+      </Link>
+      <Link to="/topics">
+        <button>View All Topics</button>
+      </Link>
+    </section>
   );
 };
 
