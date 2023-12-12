@@ -51,7 +51,7 @@ const CommentsPage = () => {
           {comments.map((comment) => {
             return (
               <li key={comment.comment_id}>
-                <CommentCard {...comment} />
+                <CommentCard comment={comment} setComments={setComments} />
               </li>
             );
           })}
