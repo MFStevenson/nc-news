@@ -67,3 +67,8 @@ button {
 #home-page > h2 {
   text-align: left;
 }
+
+#single-article-img {
+  height: 10rem;
+  width: 10rem;
+}

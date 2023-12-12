@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getArticleComments } from "../utils/api";
 import Loading from "../components/Loading";
 import CommentCard from "../components/CommentCard";
+import CommentForm from "../components/CommentForm";
 
 const CommentsPage = () => {
   const { article_id } = useParams();
@@ -41,6 +42,7 @@ const CommentsPage = () => {
       ) : (
         <p>This article does not have any comments</p>
       )}
+      <CommentForm />
       <button onClick={handleBackToArticle}>Back to article</button>
     </div>
   );
