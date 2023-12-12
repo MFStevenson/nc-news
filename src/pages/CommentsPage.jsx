@@ -27,16 +27,20 @@ const CommentsPage = () => {
   return (
     <div id="comments-page">
       <h2>Comments</h2>
-      <ul>
-        {comments.map((comment) => {
-          console.log(comment);
-          return (
-            <li key={comment.comment_id}>
-              <CommentCard {...comment} />
-            </li>
-          );
-        })}
-      </ul>
+
+      {comments.length ? (
+        <ul>
+          {comments.map((comment) => {
+            return (
+              <li key={comment.comment_id}>
+                <CommentCard {...comment} />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>This article does not have any comments</p>
+      )}
       <button onClick={handleBackToArticle}>Back to article</button>
     </div>
   );

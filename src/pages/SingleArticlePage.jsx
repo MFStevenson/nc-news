@@ -42,8 +42,8 @@ const SingleArticlePage = () => {
       </p>
       <button onClick={handleCommentsClick}>View Comments</button>
       <button>Delete</button>
-      <Link to="/">
-        <button>Go Home</button>
+      <Link to="/articles">
+        <button>Back to Articles</button>
       </Link>
     </section>
   );
