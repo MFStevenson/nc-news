@@ -23,7 +23,10 @@ function App() {
             <ArticlesPage articles={articles} setArticles={setArticles} />
           }
         ></Route>
-        <Route path="/topics" element={<TopicsPage />}></Route>
+        <Route
+          path="/topics"
+          element={<TopicsPage setArticles={setArticles} />}
+        ></Route>
         <Route
           path="/articles/:article_id"
           element={<SingleArticlePage />}
