@@ -4,15 +4,30 @@ import Header from "./components/Header";
 import ArticleStateWrapper from "./components/ArticleStateWrapper";
 import HomePage from "./pages/HomePage";
 import TopicsPage from "./pages/TopicsPage";
+import SingleArticlePage from "./pages/SingleArticlePage";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
+import ArticlesPage from "./pages/ArticlesPage";
 
 function App() {
+  const [articles, setArticles] = useState([]);
   return (
     <BrowserRouter>
       <Header />
-      <ArticleStateWrapper />
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
+        <Route
+          path="/articles"
+          element={
+            <ArticlesPage articles={articles} setArticles={setArticles} />
+          }
+        ></Route>
         <Route path="/topics" element={<TopicsPage />}></Route>
+        <Route
+          path="/articles/:article_id"
+          element={<SingleArticlePage />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -47,3 +47,12 @@ ul li {
   border: 2px solid black;
   border-radius: 15px;
 }
+
+#home-page {
+  display: block;
+  text-align: center;
+}
+
+#home-page > h2 {
+  text-align: left;
+}

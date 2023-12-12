@@ -11,3 +11,7 @@ export const getTopics = () => {
 export const getArticles = () => {
   return ncNewsApi.get("/articles");
 };
+
+export const getArticleById = (article_id) => {
+  return ncNewsApi.get(`/articles/${article_id}`);
+};
