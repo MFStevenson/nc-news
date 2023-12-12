@@ -18,12 +18,13 @@ const SingleArticlePage = () => {
 
   const handleUpVoteClick = () => {
     setRenderedVotes((currVotes) => {
-      currVotes + 1;
+      return currVotes + 1;
     });
     setErr(null);
+
     patchArticleVotes(article_id, 1).catch((err) => {
       setRenderedVotes((currVotes) => {
-        currVotes - 1;
+        return currVotes - 1;
       });
       setErr("Something went wrong, please try again.");
     });
@@ -31,12 +32,13 @@ const SingleArticlePage = () => {
 
   const handleDownVoteClick = () => {
     setRenderedVotes((currVotes) => {
-      currVotes - 1;
+      return currVotes - 1;
     });
     setErr(null);
+
     patchArticleVotes(article_id, -1).catch((err) => {
       setRenderedVotes((currVotes) => {
-        currVotes + 1;
+        return currVotes + 1;
       });
       setErr("Something went wrong, please try again.");
     });
@@ -49,7 +51,7 @@ const SingleArticlePage = () => {
       setRenderedVotes(article.votes);
       setIsLoading(false);
     });
-  }, [handleUpVoteClick, handleDownVoteClick]);
+  }, []);
 
   const {
     title,
@@ -82,6 +84,7 @@ const SingleArticlePage = () => {
         {" "}
         It has {comment_count} comment(s) and {renderedVotes} vote(s)
       </p>
+      {err ? <p>{err}</p> : null}
       <button onClick={handleCommentsClick}>View Comments</button>
       <button aria-label="up vote" onClick={handleUpVoteClick}>
         +1

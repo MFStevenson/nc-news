@@ -23,3 +23,7 @@ export const getArticleComments = (article_id) => {
 export const patchArticleVotes = (article_id, votes) => {
   return ncNewsApi.patch(`/articles/${article_id}`, { inc_votes: votes });
 };
+
+export const postComment = (article_id) => {
+  return ncNewsApi.post(`/api/articles/${article_id}/comments`);
+};
