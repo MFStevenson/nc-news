@@ -1,20 +1,20 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Header from "./components/Header";
-import ArticleStateWrapper from "./components/ArticleStateWrapper";
 import HomePage from "./pages/HomePage";
 import TopicsPage from "./pages/TopicsPage";
 import SingleArticlePage from "./pages/SingleArticlePage";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
 import ArticlesPage from "./pages/ArticlesPage";
+import CommentsPage from "./pages/CommentsPage";
 
 function App() {
   const [articles, setArticles] = useState([]);
   return (
     <BrowserRouter>
       <Header />
-      <Navbar />
+      <Navbar setArticles={setArticles} />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route
@@ -27,6 +27,10 @@ function App() {
         <Route
           path="/articles/:article_id"
           element={<SingleArticlePage />}
+        ></Route>
+        <Route
+          path="/articles/:article_id/comments"
+          element={<CommentsPage />}
         ></Route>
       </Routes>
     </BrowserRouter>

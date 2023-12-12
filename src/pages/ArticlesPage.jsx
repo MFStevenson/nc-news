@@ -3,8 +3,9 @@ import { getArticles } from "../utils/api";
 import Articles from "../components/Articles";
 import Loading from "../components/Loading";
 
-const ArticlesPage = ({ articles, setArticles }) => {
+const ArticlesPage = ({articles, setArticles}) => {
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     getArticles().then((res) => {

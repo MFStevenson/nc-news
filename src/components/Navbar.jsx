@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getTopics } from "../utils/api";
+import { Link, useNavigate } from "react-router-dom";
+import { getArticles, getTopics } from "../utils/api";
 import Loading from "./Loading";
 
-const Navbar = () => {
+const Navbar = ({ setArticles }) => {
   const [topic, setTopic] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
   useEffect(() => {
     getTopics().then((res) => {
       const { topics } = res.data;
@@ -14,7 +16,13 @@ const Navbar = () => {
     });
   }, []);
 
-  const handleTopicChange = () => {};
+  const handleTopicChange = (topic) => {
+    getArticles(topic).then((res) => {
+      const {articles} = res.data;
+      setArticles(articles);
+    });
+    navigate("/articles");
+  };
 
   if (isLoading) return <Loading />;
   return (
@@ -23,7 +31,9 @@ const Navbar = () => {
         <li>
           <button
             className="navbar-btn"
-            onClick={handleTopicChange(topic[0].slug)}
+            onClick={() => {
+              handleTopicChange(topic[0].slug);
+            }}
           >
             {topic[0].slug}
           </button>
@@ -31,7 +41,9 @@ const Navbar = () => {
         <li>
           <button
             className="navbar-btn"
-            onClick={handleTopicChange(topic[0].slug)}
+            onClick={() => {
+              handleTopicChange(topic[1].slug);
+            }}
           >
             {topic[1].slug}
           </button>
@@ -39,7 +51,9 @@ const Navbar = () => {
         <li>
           <button
             className="navbar-btn"
-            onClick={handleTopicChange(topic[0].slug)}
+            onClick={() => {
+              handleTopicChange(topic[2].slug);
+            }}
           >
             {topic[2].slug}
           </button>
