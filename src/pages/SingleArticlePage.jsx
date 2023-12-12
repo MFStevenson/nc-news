@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getArticleById } from "../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
@@ -8,6 +8,7 @@ const SingleArticlePage = () => {
   const { article_id } = useParams();
   const [articleDetails, setArticleDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getArticleById(article_id).then((res) => {
@@ -19,6 +20,10 @@ const SingleArticlePage = () => {
 
   const { title, topic, author, body, comment_count, created_at, votes } =
     articleDetails;
+
+  const handleCommentsClick = () => {
+    navigate(`/articles/${article_id}/comments`);
+  };
 
   if (isLoading) return <Loading />;
 
@@ -33,9 +38,10 @@ const SingleArticlePage = () => {
       </p>
       <p>
         {" "}
-        It has {comment_count} comments and {votes} votes
+        It has {comment_count} comment(s) and {votes} vote(s)
       </p>
-      <button>View Comments</button>
+      <button onClick={handleCommentsClick}>View Comments</button>
+      <button>Delete</button>
       <Link to="/">
         <button>Go Home</button>
       </Link>
