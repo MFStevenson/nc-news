@@ -1,15 +1,36 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getArticleComments } from "../utils/api";
+import { Link, useParams } from "react-router-dom";
+import { getArticleComments, postComment } from "../utils/api";
 import Loading from "../components/Loading";
 import CommentCard from "../components/CommentCard";
-import CommentForm from "../components/CommentForm";
 
 const CommentsPage = () => {
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const [input, setInput] = useState("");
+  const [err, setErr] = useState(null);
+
+  const updateInput = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const postBody = { username: "jessjelly", comment: input };
+    postComment(article_id, postBody)
+      .then((res) => {
+        const { postedComment } = res.data;
+        setComments((currComments) => {
+          return [postedComment, ...currComments];
+        });
+      })
+      .catch((err) => {
+        setErr("Something went wrong, please try again.");
+      });
+
+    setInput("");
+  };
 
   useEffect(() => {
     getArticleComments(article_id).then((res) => {
@@ -17,11 +38,7 @@ const CommentsPage = () => {
       setComments(comments);
       setIsLoading(false);
     });
-  }, []);
-
-  const handleBackToArticle = () => {
-    navigate(`/articles/${article_id}`);
-  };
+  }, [handleSubmit]);
 
   if (isLoading) return <Loading />;
 
@@ -42,8 +59,25 @@ const CommentsPage = () => {
       ) : (
         <p>This article does not have any comments</p>
       )}
-      <CommentForm />
-      <button onClick={handleBackToArticle}>Back to article</button>
+
+      <section id="comment-form">
+        <p>Post a comment</p>
+        {err ? <p>{err}</p> : null}
+        <form onSubmit={handleSubmit}>
+          <label>
+            Comment{" "}
+            <input
+              type="text"
+              placeholder="type comment here"
+              value={input}
+              onChange={updateInput}
+            ></input>
+          </label>
+          <button id="comment-btn">Comment</button>
+        </form>
+      </section>
+
+      <Link to={`/articles/${article_id}`}>Back to article</Link>
     </div>
   );
 };

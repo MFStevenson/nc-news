@@ -4,9 +4,9 @@ const CommentCard = ({ body, author, votes }) => {
       <p>{author} authored:</p>
       <p>{body}</p>
       <p>The comment has {votes} votes</p>
-      <button>+</button>
-      <button>-</button>
-      <button>Delete</button>
+      <button>+1</button>
+      <button>-1</button>
+      <button>Delete Comment</button>
     </div>
   );
 };
