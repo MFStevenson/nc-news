@@ -17,13 +17,15 @@ const CommentsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const postBody = { username: "jessjelly", comment: input };
     postComment(article_id, postBody)
       .then((res) => {
         const { postedComment } = res.data;
         setComments((currComments) => {
-          return [postedComment, ...currComments];
+          return [...currComments, postedComment];
         });
+        setIsLoading(false);
       })
       .catch((err) => {
         setErr("Something went wrong, please try again.");
@@ -46,6 +48,26 @@ const CommentsPage = () => {
     <div id="comments-page">
       <h2>Comments</h2>
 
+      <section id="comment-form">
+        <p>Post a comment</p>
+        {err ? <p>{err}</p> : null}
+        <form onSubmit={handleSubmit}>
+          <label>
+            Comment{" "}
+            <textarea
+              required
+              type="text"
+              placeholder="type comment here"
+              value={input}
+              onChange={updateInput}
+              cols={50}
+              rows={8}
+            ></textarea>
+          </label>
+          <button id="comment-btn">Comment</button>
+        </form>
+      </section>
+
       {comments.length ? (
         <ul>
           {comments.map((comment) => {
@@ -59,23 +81,6 @@ const CommentsPage = () => {
       ) : (
         <p>This article does not have any comments</p>
       )}
-
-      <section id="comment-form">
-        <p>Post a comment</p>
-        {err ? <p>{err}</p> : null}
-        <form onSubmit={handleSubmit}>
-          <label>
-            Comment{" "}
-            <input
-              type="text"
-              placeholder="type comment here"
-              value={input}
-              onChange={updateInput}
-            ></input>
-          </label>
-          <button id="comment-btn">Comment</button>
-        </form>
-      </section>
 
       <Link to={`/articles/${article_id}`}>Back to article</Link>
     </div>
