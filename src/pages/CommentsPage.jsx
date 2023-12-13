@@ -23,7 +23,7 @@ const CommentsPage = () => {
       .then((res) => {
         const { postedComment } = res.data;
         setComments((currComments) => {
-          return [...currComments, postedComment];
+          return [postedComment, ...currComments];
         });
         setIsLoading(false);
       })
@@ -40,7 +40,7 @@ const CommentsPage = () => {
       setComments(comments);
       setIsLoading(false);
     });
-  }, [handleSubmit]);
+  }, []);
 
   if (isLoading) return <Loading />;
 
