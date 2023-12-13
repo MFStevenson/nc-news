@@ -10,8 +10,8 @@ const Sorting = ({ setArticles }) => {
   const handleSubmit = (e) => {
     getArticles(topic, sortBy, order)
       .then((res) => {
-        const {articles} = res.data
-        setArticles(articles)
+        const { articles } = res.data;
+        setArticles(articles);
       })
       .catch();
     e.preventDefault();
@@ -22,10 +22,7 @@ const Sorting = ({ setArticles }) => {
       <label>
         Sort by
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="">None</option>
-          <option value="author">Author</option>
-          <option value={"created_at"}>Date</option>
-          <option value="title">Title</option>
+          <option value="created_at">Date</option>
           <option value="comment_count">Number of Comments</option>
           <option value="votes">Votes</option>
         </select>
@@ -33,9 +30,8 @@ const Sorting = ({ setArticles }) => {
       <label>
         Order{" "}
         <select value={order} onChange={(e) => setOrderBy(e.target.value)}>
-          <option value="">None</option>
-          <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
         </select>
       </label>
       <button>Sort</button>
