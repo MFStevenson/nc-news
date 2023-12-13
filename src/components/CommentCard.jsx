@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { deleteComment } from "../utils/api";
+import { UserContext } from "../context/UserContext";
+import Loading from "./Loading";
 
 const CommentCard = ({ comment }) => {
+  const user = { username: "jessjelly" };
   const { comment_id, body, author, votes } = comment;
   const [err, setErr] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDeleteClick = () => {
-    deleteComment(comment_id).catch(() => {
-      setErr("Something went wrong, please try again.");
-    });
+    if (user.username === author) {
+      setIsLoading(true);
+      deleteComment(comment_id)
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setErr("Something went wrong, please try again.");
+        });
+    } else {
+      setErr("Something went wrong, you are not the author of the comment");
+    }
   };
+
+  if (isLoading) return <Loading />;
   return (
     <div id="comment-card">
       <p>{author} authored:</p>
