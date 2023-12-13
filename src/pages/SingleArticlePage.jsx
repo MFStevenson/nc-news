@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getArticleById, patchArticleVotes } from "../utils/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
@@ -10,11 +10,6 @@ const SingleArticlePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [renderedVotes, setRenderedVotes] = useState(0);
   const [err, setErr] = useState(null);
-  const navigate = useNavigate();
-
-  const handleCommentsClick = () => {
-    navigate(`/articles/${article_id}/comments`);
-  };
 
   const handleUpVoteClick = () => {
     setRenderedVotes((currVotes) => {
@@ -85,17 +80,15 @@ const SingleArticlePage = () => {
         It has {comment_count} comment(s) and {renderedVotes} vote(s)
       </p>
       {err ? <p>{err}</p> : null}
-      <button onClick={handleCommentsClick}>View Comments</button>
+      <Link to={`/articles/${article_id}/comments`}>View Comments </Link>
       <button aria-label="up vote" onClick={handleUpVoteClick}>
         +1
       </button>
       <button aria-label="down vote" onClick={handleDownVoteClick}>
         -1
       </button>
-      <button>Delete</button>
-      <Link to="/articles">
-        <button>Back to Articles</button>
-      </Link>
+      <button>Delete Article </button>
+      <Link to="/articles">Back to Articles</Link>
     </section>
   );
 };
