@@ -8,13 +8,14 @@ import SingleArticlePage from "./pages/SingleArticlePage";
 import Navbar from "./components/Navbar";
 import ArticlesPage from "./pages/ArticlesPage";
 import CommentsPage from "./pages/CommentsPage";
+import ArticleTopicsPage from "./pages/ArticleTopicsPage";
 
 function App() {
   const [articles, setArticles] = useState([]);
   return (
     <BrowserRouter>
       <Header />
-      <Navbar setArticles={setArticles} />
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route
@@ -23,7 +24,10 @@ function App() {
             <ArticlesPage articles={articles} setArticles={setArticles} />
           }
         ></Route>
-        <Route path="/topics" element={<TopicsPage />}></Route>
+        <Route
+          path="/topics"
+          element={<TopicsPage setArticles={setArticles} />}
+        ></Route>
         <Route
           path="/articles/:article_id"
           element={<SingleArticlePage />}
@@ -31,6 +35,12 @@ function App() {
         <Route
           path="/articles/:article_id/comments"
           element={<CommentsPage />}
+        ></Route>
+        <Route
+          path="/articles/topics/:topic"
+          element={
+            <ArticleTopicsPage articles={articles} setArticles={setArticles} />
+          }
         ></Route>
       </Routes>
     </BrowserRouter>

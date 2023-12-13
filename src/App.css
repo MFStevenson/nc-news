@@ -60,6 +60,13 @@ button {
   border-radius: 15px;
 }
 
+#topic-card {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
 #home-page {
   display: block;
   text-align: center;
