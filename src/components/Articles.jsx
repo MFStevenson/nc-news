@@ -1,10 +1,12 @@
 import ArticleCard from "./ArticleCard";
+import Sorting from "./Sorting";
 
-const Articles = ({ articles }) => {
-
+const Articles = ({ articles, setArticles }) => {
   return (
     <>
       <h2>Articles</h2>
+
+      <Sorting setArticles={setArticles} />
 
       <ul>
         {articles.map((article) => {
