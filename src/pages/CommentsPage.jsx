@@ -38,7 +38,7 @@ const CommentsPage = () => {
       setComments(comments);
       setIsLoading(false);
     });
-  }, [handleSubmit]);
+  }, []);
 
   if (isLoading) return <Loading />;
 

@@ -24,7 +24,7 @@ const TopicsPage = ({ setArticles }) => {
         {topics.map((topic) => {
           return (
             <li key={topic.slug}>
-              <TopicsCard topic={topic} setArticles={setArticles} />
+              <TopicsCard {...topic} />
             </li>
           );
         })}

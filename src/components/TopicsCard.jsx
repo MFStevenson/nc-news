@@ -1,21 +1,12 @@
 import { Link } from "react-router-dom";
-import { getArticles } from "../utils/api";
 
-const TopicsCard = ({ topic, setArticles }) => {
-  const { slug, description } = topic;
+const TopicsCard = ({ slug, description }) => {
 
   return (
     <div id="topic-card">
       <h3>{slug}</h3>
       <p>{description}</p>
-      <Link to='/articles'
-        onClick={() => {
-          getArticles(slug).then((res) => {
-            const { articles } = res.data;
-            setArticles(articles);
-          });
-          
-        }}
+      <Link to={`/articles/topics/${slug}`}
       >
         View Articles
       </Link>
