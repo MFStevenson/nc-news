@@ -3,15 +3,17 @@ import { deleteComment } from "../utils/api";
 import { UserContext } from "../context/UserContext";
 import Loading from "./Loading";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, setComment }) => {
   const user = { username: "jessjelly" };
   const { comment_id, body, author, votes } = comment;
   const [err, setErr] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const[isDeleted, setIsDeleted] = useState(false);
 
   const handleDeleteClick = () => {
     if (user.username === author) {
       setIsLoading(true);
+      setIsDeleted(true);
       deleteComment(comment_id)
         .then(() => {
           setIsLoading(false);
@@ -25,16 +27,22 @@ const CommentCard = ({ comment }) => {
   };
 
   if (isLoading) return <Loading />;
-  return (
-    <div id="comment-card">
-      <p>{author} authored:</p>
-      <p>{body}</p>
-      <p>The comment has {votes} votes</p>
-      <button>+1</button>
-      <button>-1</button>
-      {err ? <p>{err}</p> : null}
-      <button onClick={handleDeleteClick}>Delete Comment</button>
-    </div>
-  );
+
+  {
+    return isDeleted ? (
+      <p>Comment has been deleted</p>
+    ) : (
+      <div id="comment-card">
+        <p>{author} authored:</p>
+        <p>{body}</p>
+        <p>The comment has {votes} votes</p>
+        <button>+1</button>
+        <button>-1</button>
+        {err ? <p>{err}</p> : null}
+        <button onClick={handleDeleteClick}>Delete Comment</button>
+      </div>
+    );
+  }
 };
+
 export default CommentCard;
