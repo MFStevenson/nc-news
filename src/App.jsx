@@ -49,11 +49,11 @@ function App() {
         <Route path="/signin" element={<SignInPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
-      </Routes>
-      <Route
+        <Route
           path="/*"
           element={<Error msg={"path not found"} status={404} />}
         ></Route>
+      </Routes>
     </BrowserRouter>
   );
 }

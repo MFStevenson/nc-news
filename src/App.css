@@ -80,3 +80,8 @@ button {
   height: 10rem;
   width: 10rem;
 }
+
+#header-profile-pic {
+  height: 5rem;
+  width: 5rem;
+}

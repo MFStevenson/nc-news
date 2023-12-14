@@ -16,24 +16,18 @@ const SignInPage = () => {
   const handleSubmit = (e) => {
     getUser(input)
       .then((res) => {
-        setUser(res.data);
-        
+        setUser(res.data.user);
       })
       .catch(() => {
         setErr("Something went wrong, please try again");
       });
 
     e.preventDefault();
-    setUser((currUser) => {
-      return { ...currUser, username: input };
-    });
     setInput("");
   };
 
   if (user.username) {
-    useEffect(() => {
-      navigate("/profile");
-    }, []);
+    navigate("/profile");
   } else {
     return (
       <>
@@ -49,9 +43,9 @@ const SignInPage = () => {
               onChange={updateInput}
             ></input>
           </label>
-          <Link to="/profile">
-            <button id="sign-in-btn">Sign in</button>
-          </Link>
+
+          <button id="sign-in-btn">Sign in</button>
+
           {err ? <p>{err}</p> : null}
         </form>
 
