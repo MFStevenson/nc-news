@@ -8,8 +8,12 @@ export const getTopics = () => {
   return ncNewsApi.get("/topics");
 };
 
-export const getArticles = (topic = null, sortBy = null, order = null) => {
-  const params = { topic: topic, sort_by: sortBy, order: order };
+export const getArticles = (
+  topic = null,
+  sortBy = "created_at",
+  order = "desc"
+) => {
+  const params = { sort_by: sortBy, order: order, topic: topic };
 
   return ncNewsApi.get("/articles", {
     params: params,

@@ -2,16 +2,18 @@ import { useState } from "react";
 import { getArticles } from "../utils/api";
 import { useParams } from "react-router-dom";
 
-const Sorting = ({ setArticles }) => {
+const Sorting = ({ setArticles, setIsLoading }) => {
   const { topic } = useParams();
   const [sortBy, setSortBy] = useState("");
   const [order, setOrderBy] = useState("");
 
   const handleSubmit = (e) => {
+    setIsLoading(true);
     getArticles(topic, sortBy, order)
       .then((res) => {
         const { articles } = res.data;
         setArticles(articles);
+        setIsLoading(false);
       })
       .catch();
     e.preventDefault();
