@@ -9,7 +9,7 @@ const Header = () => {
       <Link to="/">
         <h1>NC News</h1>
       </Link>
-      <Link to="/" id="profile-pic-link">
+      <Link to="/signin" id="profile-pic-link">
         {Object.keys(user).length ? (
           <img
             id="header-profile-pic"
@@ -17,7 +17,7 @@ const Header = () => {
             alt="profile picture"
           ></img>
         ) : (
-          <button id="profile-btn">Login</button>
+          <p>Login</p>
         )}
       </Link>
     </header>

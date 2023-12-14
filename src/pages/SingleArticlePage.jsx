@@ -65,10 +65,10 @@ const SingleArticlePage = () => {
     article_img_url,
   } = articleDetails;
 
-  if (isLoading) return <Loading />
-  if (apiErr){
-    return <Error msg={apiErr.msg} />
-  }else{
+  if (isLoading) return <Loading />;
+  if (apiErr) {
+    return <Error msg={apiErr.msg} status={apiErr.status} />;
+  } else {
     return (
       <section id="article-info">
         <h2>{title}</h2>
@@ -100,7 +100,6 @@ const SingleArticlePage = () => {
       </section>
     );
   }
-  
 };
 
 export default SingleArticlePage;
