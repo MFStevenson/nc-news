@@ -13,7 +13,12 @@ export const getArticles = (topic) => {
 };
 
 export const getArticleById = (article_id) => {
-  return ncNewsApi.get(`/articles/${article_id}`);
+  return ncNewsApi.get(`/articles/${article_id}`).catch((err) => {
+    return Promise.reject({
+      status: err.response.status,
+      msg: err.response.data.msg,
+    });
+  });
 };
 
 export const getArticleComments = (article_id) => {

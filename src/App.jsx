@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import ArticlesPage from "./pages/ArticlesPage";
 import CommentsPage from "./pages/CommentsPage";
 import ArticleTopicsPage from "./pages/ArticleTopicsPage";
+import Error from "./components/Error"
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -42,6 +43,7 @@ function App() {
             <ArticleTopicsPage articles={articles} setArticles={setArticles} />
           }
         ></Route>
+        <Route path="/*" element={<Error msg={"path not found"} />}></Route>
       </Routes>
     </BrowserRouter>
   );
