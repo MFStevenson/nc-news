@@ -5,10 +5,11 @@ const HomePage = () => {
     <section id="home-page">
       <h2>Choose which page you'd like to visit</h2>
       <Link to="/articles">
-        <button>View All Articles</button>
+        View All Articles
       </Link>
+      <hr></hr>
       <Link to="/topics">
-        <button>View All Topics</button>
+        View All Topics
       </Link>
     </section>
   );

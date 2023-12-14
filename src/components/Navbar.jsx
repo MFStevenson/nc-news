@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { getArticles, getTopics } from "../utils/api";
+import { Link  } from "react-router-dom";
+import { getTopics } from "../utils/api";
 import Loading from "./Loading";
 
 const Navbar = () => {
