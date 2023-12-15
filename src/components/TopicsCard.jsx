@@ -6,7 +6,7 @@ const TopicsCard = ({ slug, description }) => {
     <div id="topic-card">
       <h3>{slug}</h3>
       <p>{description}</p>
-      <Link to={`/articles/topics/${slug}`}
+      <Link className='link-to-article' to={`/articles/topics/${slug}`}
       >
         View Articles
       </Link>

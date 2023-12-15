@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { getArticleById, patchArticleVotes, deleteArticle } from "../utils/api";
+import { getArticleById, deleteComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import { UserContext } from "../context/UserContext";
+import VoteButtons from "../components/VoteButtons";
 
 const SingleArticlePage = () => {
   const { article_id } = useParams();
@@ -15,34 +16,6 @@ const SingleArticlePage = () => {
   const [err, setErr] = useState(null);
   const [apiErr, setApiErr] = useState({});
   const [isDeleted, setIsDeleted] = useState(false);
-
-  const handleUpVoteClick = () => {
-    setRenderedVotes((currVotes) => {
-      return currVotes + 1;
-    });
-    setErr(null);
-
-    patchArticleVotes(article_id, 1).catch((err) => {
-      setRenderedVotes((currVotes) => {
-        return currVotes - 1;
-      });
-      setErr("Something went wrong, please try again.");
-    });
-  };
-
-  const handleDownVoteClick = () => {
-    setRenderedVotes((currVotes) => {
-      return currVotes - 1;
-    });
-    setErr(null);
-
-    patchArticleVotes(article_id, -1).catch((err) => {
-      setRenderedVotes((currVotes) => {
-        return currVotes + 1;
-      });
-      setErr("Something went wrong, please try again.");
-    });
-  };
 
   useEffect(() => {
     getArticleById(article_id)
@@ -101,17 +74,18 @@ const SingleArticlePage = () => {
           It has {comment_count} comment(s) and {renderedVotes} vote(s)
         </p>
         {err ? <p>{err}</p> : null}
-        <Link to={`/articles/${article_id}/comments`}>View Comments </Link>
-        <button aria-label="up vote" onClick={handleUpVoteClick}>
-          +1
-        </button>
-        <button aria-label="down vote" onClick={handleDownVoteClick}>
-          -1
-        </button>
+        <VoteButtons
+          article_id={article_id}
+          setRenderedVotes={setRenderedVotes}
+          setErr={setErr}
+        />
         {user.username === author ? (
           <button onClick={handleDeleteClick}>Delete Article </button>
         ) : null}
-        <Link to="/articles">Back to Articles</Link>
+        <section id="links">
+          <Link to={`/articles/${article_id}/comments`}>View Comments </Link>
+          <Link to="/articles">Back to Articles</Link>
+        </section>
       </section>
     );
   }

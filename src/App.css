@@ -53,6 +53,10 @@ button {
   margin-right: 0.1rem;
 }
 
+h2 {
+  text-decoration: underline;
+}
+
 #article-card {
   margin-bottom: 1rem;
   padding: 0.5rem;
@@ -101,4 +105,13 @@ button {
 #topic-form > button {
   margin-top: 0.5rem;
   display: block;
+}
+
+#links {
+  text-align: right;
+}
+#links > a {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
 }

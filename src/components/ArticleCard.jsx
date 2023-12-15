@@ -21,7 +21,9 @@ const ArticleCard = ({
         The article has {votes} votes and {comment_count} comments
       </p>
 
-      <Link to={`/articles/${article_id}`}>View</Link>
+      <Link className="link-to-article" to={`/articles/${article_id}`}>
+        View
+      </Link>
     </section>
   );
 };
