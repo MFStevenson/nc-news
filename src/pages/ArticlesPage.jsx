@@ -17,7 +17,7 @@ const ArticlesPage = ({ articles, setArticles }) => {
 
   return (
     <>
-      <Articles articles={articles} />
+      <Articles articles={articles} setArticles={setArticles} />
     </>
   );
 };

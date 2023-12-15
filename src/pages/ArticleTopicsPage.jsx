@@ -9,8 +9,10 @@ const ArticleTopicsPage = ({ articles, setArticles }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getArticles(topic).then((res) => {
       const { articles } = res.data;
+      console.log(articles)
       setArticles(articles);
       setIsLoading(false);
     });
@@ -20,7 +22,7 @@ const ArticleTopicsPage = ({ articles, setArticles }) => {
 
   return (
     <>
-      <Articles articles={articles} />
+      <Articles articles={articles} setArticles={setArticles} />
     </>
   );
 };

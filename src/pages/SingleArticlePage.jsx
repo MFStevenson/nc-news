@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 const SingleArticlePage = () => {
+  
   const { article_id } = useParams();
   const [articleDetails, setArticleDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +62,6 @@ const SingleArticlePage = () => {
     body,
     comment_count,
     created_at,
-    votes,
     article_img_url,
   } = articleDetails;
 
