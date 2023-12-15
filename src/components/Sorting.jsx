@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api";
 import { useParams } from "react-router-dom";
 
-const Sorting = ({ setArticles, setIsLoading }) => {
+const Sorting = ({ setArticles }) => {
   const { topic } = useParams();
   const [sortBy, setSortBy] = useState("");
   const [order, setOrderBy] = useState("");

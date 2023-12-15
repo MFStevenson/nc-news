@@ -37,8 +37,14 @@ nav > ul li {
   padding-bottom: 10px;
 }
 
-ul li {
+li {
   list-style-type: none;
+  display: inline-block;
+  width: 100%;
+}
+
+ul {
+  display: inline-block;
   padding-left: 0;
 }
 
@@ -82,9 +88,17 @@ button {
   width: 10rem;
 }
 
-#sorting-form > label,
-button {
-  margin-top: 0.5rem;
+#header-profile-pic {
+  height: 5rem;
+  width: 5rem;
+}
 
+#topic-form > label {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+#topic-form > button {
+  margin-top: 0.5rem;
   display: block;
 }

@@ -9,6 +9,9 @@ import Navbar from "./components/Navbar";
 import ArticlesPage from "./pages/ArticlesPage";
 import CommentsPage from "./pages/CommentsPage";
 import ArticleTopicsPage from "./pages/ArticleTopicsPage";
+import Error from "./components/Error";
+import SignInPage from "./pages/SignInPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -41,6 +44,12 @@ function App() {
           element={
             <ArticleTopicsPage articles={articles} setArticles={setArticles} />
           }
+        ></Route>
+        <Route path="/signin" element={<SignInPage />}></Route>
+        <Route path="/profile" element={<ProfilePage />}></Route>
+        <Route
+          path="/*"
+          element={<Error msg={"path not found"} status={404} />}
         ></Route>
       </Routes>
     </BrowserRouter>
