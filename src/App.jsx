@@ -11,7 +11,6 @@ import CommentsPage from "./pages/CommentsPage";
 import ArticleTopicsPage from "./pages/ArticleTopicsPage";
 import Error from "./components/Error";
 import SignInPage from "./pages/SignInPage";
-import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
@@ -47,7 +46,6 @@ function App() {
           }
         ></Route>
         <Route path="/signin" element={<SignInPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route
           path="/*"

@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getArticleComments, postComment } from "../utils/api";
 import Loading from "../components/Loading";
 import CommentCard from "../components/CommentCard";
+import { UserContext } from "../context/UserContext";
 
 const CommentsPage = () => {
   const { article_id } = useParams();
+  const { user } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [input, setInput] = useState("");
@@ -18,17 +20,19 @@ const CommentsPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const postBody = { username: "jessjelly", comment: input };
+    const postBody = { username: user.username, comment: input };
     postComment(article_id, postBody)
       .then((res) => {
         const { postedComment } = res.data;
         setComments((currComments) => {
           return [postedComment, ...currComments];
         });
-        setIsLoading(false);
       })
       .catch((err) => {
         setErr("Something went wrong, please try again.");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     setInput("");

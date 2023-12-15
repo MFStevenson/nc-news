@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
-import { getArticleById, patchArticleVotes } from "../utils/api";
+import { useContext, useEffect, useState } from "react";
+import { getArticleById, patchArticleVotes, deleteArticle } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import { UserContext } from "../context/UserContext";
+
 const SingleArticlePage = () => {
-  
   const { article_id } = useParams();
+  const { user } = useContext(UserContext);
   const [articleDetails, setArticleDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [renderedVotes, setRenderedVotes] = useState(0);
   const [err, setErr] = useState(null);
   const [apiErr, setApiErr] = useState({});
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const handleUpVoteClick = () => {
     setRenderedVotes((currVotes) => {
@@ -65,11 +68,21 @@ const SingleArticlePage = () => {
     article_img_url,
   } = articleDetails;
 
+  const handleDeleteClick = () => {
+    setIsDeleted(true);
+    deleteComment(article_id).catch(() => {
+      setIsDeleted(false);
+      setErr("Something went wrong, please try again.");
+    });
+  };
+
   if (isLoading) return <Loading />;
-  if (apiErr) {
+  if (Object.keys(apiErr).length) {
     return <Error msg={apiErr.msg} status={apiErr.status} />;
   } else {
-    return (
+    return isDeleted ? (
+      <p>Article has been deleted </p>
+    ) : (
       <section id="article-info">
         <h2>{title}</h2>
         <p>{body}</p>
@@ -95,7 +108,9 @@ const SingleArticlePage = () => {
         <button aria-label="down vote" onClick={handleDownVoteClick}>
           -1
         </button>
-        <button>Delete Article </button>
+        {user.username === author ? (
+          <button onClick={handleDeleteClick}>Delete Article </button>
+        ) : null}
         <Link to="/articles">Back to Articles</Link>
       </section>
     );

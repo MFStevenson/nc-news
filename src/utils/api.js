@@ -8,6 +8,10 @@ export const getTopics = () => {
   return ncNewsApi.get("/topics");
 };
 
+export const postTopic = (postBody) => {
+  return ncNewsApi.post(`/topics`, postBody);
+};
+
 export const getArticles = (
   topic = null,
   sortBy = "created_at",
@@ -29,6 +33,10 @@ export const getArticleById = (article_id) => {
   });
 };
 
+export const deleteArticle = (article_id) => {
+  return ncNewsApi.delete(`/articles/${article_id}`);
+};
+
 export const getArticleComments = (article_id) => {
   return ncNewsApi.get(`/articles/${article_id}/comments`);
 };
@@ -45,6 +53,15 @@ export const deleteComment = (comment_id) => {
   return ncNewsApi.delete(`/comments/${comment_id}`);
 };
 
+export const patchCommentVotes = (comment_id, votes) => {
+  return ncNewsApi.patch(`/comments/${comment_id}`, { inc_votes: votes });
+};
+
 export const getUser = (username) => {
-  return ncNewsApi.get(`/users/${username}`);
+  return ncNewsApi.get(`/users/${username}`).catch((err) => {
+    return Promise.reject({
+      status: err.response.status,
+      msg: err.response.data.msg,
+    });
+  });
 };

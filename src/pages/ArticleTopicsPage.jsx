@@ -12,7 +12,6 @@ const ArticleTopicsPage = ({ articles, setArticles }) => {
     setIsLoading(true);
     getArticles(topic).then((res) => {
       const { articles } = res.data;
-      console.log(articles)
       setArticles(articles);
       setIsLoading(false);
     });
